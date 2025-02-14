@@ -1,136 +1,111 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@300;400&family=Mitr:wght@300&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To my Babe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>แบร่ๆ</title>
     <style>
         body {
             font-family: 'Itim', 'Mali', 'Mitr', sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            width: 100vw;
+            height: 100vh;
             background-color: #ffcccc;
-            text-align: center;
-            padding: 20px;
+            overflow: hidden;
+            flex-direction: column;
             position: relative;
+            margin: 0;
         }
-        #background-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 90%;
-            margin-bottom: 20px;
-        }
-        .button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            border: none;
-            background-color: rgb(244, 118, 149);
-            color: white;
-            border-radius: 20px;
-            cursor: pointer;
-        }
-        .button:hover {
-            background-color: darkred;
-        }
-        .gallery {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .polaroid {
-            background: white;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            width: 100px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        .polaroid img {
-            width: 100%;
-            border-radius: 5px;
-        }
-        .polaroid:hover {
-            transform: rotate(-5deg) scale(1.1);
-        }
-        @media (min-width: 600px) {
-            .polaroid {
-                width: 120px;
-            }
-        }
-        .special-text {
-            font-size: 2em;
+        .title {
+            font-family: 'Itim', 'Mali', 'Mitr', sans-serif;
+            font-size: 1.5em;
             font-weight: bold;
-            color: rgb(234, 71, 71);
-            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            color: #d63384;
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
             animation: pulse 1.5s infinite;
         }
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+        .character {
+            position: absolute;
+            font-size: 50px;
+            cursor: pointer;
+            animation: wiggle 0.5s infinite ease-in-out;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #d63384;
+            display: none;
+            text-align: center;
+        }
+        .next-heart {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            cursor: pointer;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div id="background-effect"></div>
-    <h1 class="special-text">Happy Valentine's นะตุ๊ต๊ะ </h1>
-    <div class="card">
-        <p id="message">เค้ารักตุ๊ต๊ะที่สุดเลยยย💖</p>
-    </div>
-    <button class="button" onclick="changeMessage()">💖 แตะๆ ตรงนี้จิ่</button>
+    <h2 class="title">แน่จริงก็จับเค้าให้ได้สิ! 💖</h2>
+    <div class="character" onclick="moveCharacter()">❤️</div>
+    <div class="message">หว้าาาจับได้ซะแล้ว! <br>จับเค้าอีกรอบจิ่ 😘</div>
+    <span class="next-heart" onclick="goToNextPage()">❤️</span>
     
-    <div class="gallery">
-        <div class="polaroid"><img src="IMG_6049.png" alt="รูป 5"></div>
-    </div>
-    <div class="gallery">
-        <div class="polaroid"><img src="IMG_6044.JPG" alt="รูป 1"></div>
-        <div class="polaroid"><img src="IMG_6045.JPEG" alt="รูป 2"></div>
-        <div class="polaroid"><img src="IMG_6046.JPEG" alt="รูป 3"></div>
-        <div class="polaroid"><img src="IMG_6047.JPEG" alt="รูป 4"></div>
-    </div>
-
     <script>
-        const loveMessages = [
-            "เค้ารักตุ๊ต๊ะที่สุดเลยยย💖",
-            "อยู่กับเค้าไปนานๆเลยนะตุ๊ต๊ะ🌟",
-            "ปุ๊กปิ๊กรักตุ๊ต๊ะ❤️",
-            "ไอต้าวความสุขของเค้า💕",
-            "จุ๊บๆๆๆ ตุ๊ต๊ะ😘"
-        ];
+        let moves = 0;
 
-        function changeMessage() {
-            const randomMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
-            document.getElementById("message").textContent = randomMessage;
+        function getRandomPosition() {
+            const margin = 50;
+            const x = Math.random() * (window.innerWidth - margin * 2) + margin;
+            const y = Math.random() * (window.innerHeight - margin * 2) + margin;
+            return { x, y };
+        }
+
+        function moveCharacter() {
+            if (moves < 5) {
+                const character = document.querySelector(".character");
+                const { x, y } = getRandomPosition();
+                character.style.left = `${x}px`;
+                character.style.top = `${y}px`;
+                moves++;
+            } else {
+                document.querySelector(".character").style.display = "none";
+                document.querySelector(".message").style.display = "block";
+                document.querySelector(".next-heart").style.display = "inline-block";
+            }
+        }
+
+        function goToNextPage() {
+            window.location.href = "page2.html"; // เปลี่ยนเป็นหน้าที่ต้องการไป
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS("background-effect", {
-            particles: {
-                number: { value: 30 },
-                shape: { type: "image", image: { src: "https://cdn-icons-png.flaticon.com/512/833/833472.png", width: 100, height: 100 } },
-                opacity: { value: 0.8 },
-                size: { value: 20 },
-                move: { speed: 2 }
-            }
-        });
-    </script>    
 </body>
 </html>
