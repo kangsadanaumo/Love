@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@300;400&family=Mitr:wght@300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>แบร่ๆ</title>
+    <style>
+        body {
+            font-family: 'Itim', 'Mali', 'Mitr', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffcccc;
+            overflow: hidden;
+            flex-direction: column;
+            position: relative;
+            margin: 0;
+        }
+        .title {
+            font-family: 'Itim', 'Mali', 'Mitr', sans-serif;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #d63384;
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+        .character {
+            position: absolute;
+            font-size: 50px;
+            cursor: pointer;
+            animation: wiggle 0.5s infinite ease-in-out;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        .message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Itim', 'Mali', 'Mitr', sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            color: #d63384;
+            display: none;
+            text-align: center;
+        }
+        .next-heart {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="title">ตุ๊ต๊ะตามเค้ามาเย็ววว <br><br>เค้ามีอะไรจะบอกแหละ <br>จับๆเค้าเร็ววว</h2>
+    <div class="character" onclick="moveCharacter()">❤️</div>
+    <div class="message">ขี้เกียจตามปุ๊กปิ๊กแล้วละจิ่ <br>อะๆ ไม่แกล้งเเย้ว <br>ตามเค้ามาเย็วว</div>
+    <span class="next-heart" onclick="goToNextPage()">❤️</span>
+    
+    <script>
+        let moves = 0;
+
+        function getRandomPosition() {
+            const margin = 50;
+            const x = Math.random() * (window.innerWidth - margin * 2) + margin;
+            const y = Math.random() * (window.innerHeight - margin * 2) + margin;
+            return { x, y };
+        }
+
+        function moveCharacter() {
+            if (moves < 5) {
+                const character = document.querySelector(".character");
+                const { x, y } = getRandomPosition();
+                character.style.left = `${x}px`;
+                character.style.top = `${y}px`;
+                moves++;
+            } else {
+                document.querySelector(".character").style.display = "none";
+                document.querySelector(".message").style.display = "block";
+                document.querySelector(".next-heart").style.display = "inline-block";
+            }
+        }
+
+        function goToNextPage() {
+            window.location.href = "index.html"; // เปลี่ยนเป็นหน้าที่ต้องการไป
+        }
+    </script>
+</body>
+</html>
